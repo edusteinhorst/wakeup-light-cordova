@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="edusteinhorst.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Lamp</name>
+    <description>
+        An Internet enabled smart lamp, based on the ESP8266.
+    </description>
+    <author email="edu@edusteinhorst.com" href="http://wwww.edusteinhorst.com">
+        Edu Steinhorst
+    </author>
+    <icon src="www/img/logo.png" />
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="prerendered-icon" value="false" />
+    <engine name="android" spec="~5.1.1" />
+    <plugin name="cordova-plugin-zeroconf" spec="~1.2.0" />
+</widget>

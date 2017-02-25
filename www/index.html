@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; connect-src ws:">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--link rel="stylesheet" type="text/css" href="css/index.css" -->
+    <title>Lamp</title>
+    <style>
+        .clapperTog {
+            position: relative;
+            width: 55px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .clapperTog-checkbox {
+            display: none;
+        }
+
+        .clapperTog-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            height: 20px;
+            padding: 0;
+            line-height: 20px;
+            border: 0px solid #FFFFFF;
+            border-radius: 30px;
+            background-color: #9E9E9E;
+        }
+
+        .clapperTog-label:before {
+            content: "";
+            display: block;
+            width: 30px;
+            margin: -5px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 31px;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px 0px #757575;
+        }
+
+        .clapperTog-checkbox:checked+ .clapperTog-label {
+            background-color: #42A5F5;
+        }
+
+        .clapperTog-checkbox:checked+ .clapperTog-label,
+        .clapperTog-checkbox:checked+ .clapperTog-label:before {
+            border-color: #42A5F5;
+        }
+
+        .clapperTog-checkbox:checked+ .clapperTog-label .clapperTog-inner {
+            margin-left: 0;
+        }
+
+        .clapperTog-checkbox:checked+ .clapperTog-label:before {
+            right: 0px;
+            background-color: #2196F3;
+            box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .alarmTog {
+            position: relative;
+            width: 55px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .alarmTog-checkbox {
+            display: none;
+        }
+
+        .alarmTog-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            height: 20px;
+            padding: 0;
+            line-height: 20px;
+            border: 0px solid #FFFFFF;
+            border-radius: 30px;
+            background-color: #9E9E9E;
+        }
+
+        .alarmTog-label:before {
+            content: "";
+            display: block;
+            width: 30px;
+            margin: -5px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 31px;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px 0px #757575;
+        }
+
+        .alarmTog-checkbox:checked+ .alarmTog-label {
+            background-color: #42A5F5;
+        }
+
+        .alarmTog-checkbox:checked+ .alarmTog-label,
+        .alarmTog-checkbox:checked+ .alarmTog-label:before {
+            border-color: #42A5F5;
+        }
+
+        .alarmTog-checkbox:checked+ .alarmTog-label .alarmTog-inner {
+            margin-left: 0;
+        }
+
+        .alarmTog-checkbox:checked+ .alarmTog-label:before {
+            right: 0px;
+            background-color: #2196F3;
+            box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .sunriseTog {
+            position: relative;
+            width: 55px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .sunriseTog-checkbox {
+            display: none;
+        }
+
+        .sunriseTog-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            height: 20px;
+            padding: 0;
+            line-height: 20px;
+            border: 0px solid #FFFFFF;
+            border-radius: 30px;
+            background-color: #9E9E9E;
+        }
+
+        .sunriseTog-label:before {
+            content: "";
+            display: block;
+            width: 30px;
+            margin: -5px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 31px;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px 0px #757575;
+        }
+
+        .sunriseTog-checkbox:checked+ .sunriseTog-label {
+            background-color: #42A5F5;
+        }
+
+        .sunriseTog-checkbox:checked+ .sunriseTog-label,
+        .sunriseTog-checkbox:checked+ .sunriseTog-label:before {
+            border-color: #42A5F5;
+        }
+
+        .sunriseTog-checkbox:checked+ .sunriseTog-label .sunriseTog-inner {
+            margin-left: 0;
+        }
+
+        .sunriseTog-checkbox:checked+ .sunriseTog-label:before {
+            right: 0px;
+            background-color: #2196F3;
+            box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .beepingTog {
+            position: relative;
+            width: 55px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .beepingTog-checkbox {
+            display: none;
+        }
+
+        .beepingTog-label {
+            display: block;
+            overflow: hidden;
+            cursor: pointer;
+            height: 20px;
+            padding: 0;
+            line-height: 20px;
+            border: 0px solid #FFFFFF;
+            border-radius: 30px;
+            background-color: #9E9E9E;
+        }
+
+        .beepingTog-label:before {
+            content: "";
+            display: block;
+            width: 30px;
+            margin: -5px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 31px;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px 0px #757575;
+        }
+
+        .beepingTog-checkbox:checked+ .beepingTog-label {
+            background-color: #42A5F5;
+        }
+
+        .beepingTog-checkbox:checked+ .beepingTog-label,
+        .beepingTog-checkbox:checked+ .beepingTog-label:before {
+            border-color: #42A5F5;
+        }
+
+        .beepingTog-checkbox:checked+ .beepingTog-label .beepingTog-inner {
+            margin-left: 0;
+        }
+
+        .beepingTog-checkbox:checked+ .beepingTog-label:before {
+            right: 0px;
+            background-color: #2196F3;
+            box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            margin: 18px 0;
+            width: 100%;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 0px 0px 0px #000000, 0px 0px 1px #0d0d0d;
+            background: #42A5F5;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            box-shadow: 0px 0px 0px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 12px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -14px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #42A5F5;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: #42A5F5;
+            border-radius: 1.3px;
+            border: 0.2px solid #010101;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 16px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: transparent;
+            border-color: transparent;
+            border-width: 16px 0;
+            color: transparent;
+        }
+
+        input[type=range]::-ms-fill-lower {
+            background: #2a6495;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+
+        input[type=range]::-ms-fill-upper {
+            background: #3071a9;
+            border: 0.2px solid #010101;
+            border-radius: 2.6px;
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        }
+
+        input[type=range]::-ms-thumb {
+            box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            border: 1px solid #000000;
+            height: 36px;
+            width: 16px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]:focus::-ms-fill-lower {
+            background: #3071a9;
+        }
+
+        input[type=range]:focus::-ms-fill-upper {
+            background: #367ebd;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0.0;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+
+        var lampIP;
+
+        function setDay(elem) {
+
+            // alert(elem.id);
+
+            if (elem.style.backgroundColor == 'white') {
+                elem.style.backgroundColor = '#42A5F5';
+            } else {
+                elem.style.backgroundColor = 'white';
+            }
+
+            var alarmDays = "";
+
+            if (document.getElementById("Mo").style.backgroundColor != 'white')
+                alarmDays += "Mo";
+            if (document.getElementById("Tu").style.backgroundColor != 'white')
+                alarmDays += "Tu";
+            if (document.getElementById("We").style.backgroundColor != 'white')
+                alarmDays += "We";
+            if (document.getElementById("Th").style.backgroundColor != 'white')
+                alarmDays += "Th";
+            if (document.getElementById("Fr").style.backgroundColor != 'white')
+                alarmDays += "Fr";
+            if (document.getElementById("Sa").style.backgroundColor != 'white')
+                alarmDays += "Sa";
+            if (document.getElementById("Su").style.backgroundColor != 'white')
+                alarmDays += "Su";
+
+            connection.send("ALARM_DAYS=" + alarmDays);
+        }
+
+        function start() {
+
+            document.getElementById("connModalContent").innerHTML = "Resolving address";
+            document.getElementById("connModal").style.display = 'block';
+
+            var zeroconf = cordova.plugins.zeroconf;
+
+            zeroconf.watch('_http._tcp.', 'local.', function(result) {
+
+                var action = result.action;
+                var service = result.service;
+
+                console.log("Got " + action + " for " + service.name);
+
+                if (action == 'added' && service.name == 'lamp') {
+                    if (!lampIP) {
+                        //alert('Got ' + service.addresses[0]);
+                        lampIP = service.ipv4Addresses[0];
+                        connect();
+                    } else {
+                        lampIP = service.ipv4Addresses[0];
+                    }
+
+                }
+            });
+        }
+
+        function connect() {
+
+            document.getElementById("connModalContent").innerHTML = "Connecting";
+            document.getElementById("connModal").style.display = 'block';
+
+            var ip = 'ws://' + lampIP + ':81/';
+
+            connection = new WebSocket(ip, ['arduino']);
+            console.log("Connecting to " + ip);
+
+            connection.onopen = function() {
+                console.log("Connected.");
+                document.getElementById("connModal").style.display = 'none';
+            };
+
+            connection.onerror = function(error) {
+                console.log('WebSocket Error ', error);
+                setTimeout(function() {
+                    connect();
+                }, (5 * 1000));
+            };
+
+            connection.onclose = function(error) {
+                console.log('WebSocket closed ', error);
+                setTimeout(function() {
+                    connect();
+                }, (5 * 1000));
+            };
+
+            connection.onmessage = function(e) {
+
+                console.log('Server: ', e.data);
+
+                var sample = e.data;
+
+                if (sample.indexOf("CLOCK") > -1) {
+                    var hour = sample.substring(sample.indexOf("=") + 1, sample.indexOf(":"));
+                    var mins = sample.substring(sample.indexOf(":") + 1, sample.length);
+                    mins = mins.substring(0, mins.indexOf(":"));
+                    var secs = sample.substring(sample.indexOf(":") + 1, sample.length);
+                    secs = secs.substring(secs.indexOf(":") + 1, secs.length);
+                    var remoteDate = new Date();
+                    remoteDate.setHours(hour, mins, secs);
+                    var localDate = new Date();
+                    var delta = Math.abs(localDate.getTime() - remoteDate.getTime());
+                    console.log("Remote clock delta is " + delta + "ms.");
+
+                    if (delta > 120000)
+                        alert("WARNING! Lamp clock might be off: " + remoteDate);
+
+                    return;
+                }
+
+                var clapper = sample.substring(sample.indexOf("CLAPPER=") + 8, sample.indexOf("&ALARM"));
+                if (clapper == 1)
+                    document.getElementById("clapperTog").checked = true;
+
+                var alarm = sample.substring(sample.indexOf("ALARM=") + 6, sample.indexOf("&DIMMER"));
+                if (alarm == 1)
+                    document.getElementById("alarmTog").checked = true;
+
+                var dimmer = sample.substring(sample.indexOf("DIMMER=") + 7, sample.indexOf("&SUNRISE"));
+                document.getElementById("dimmerSlider").value = dimmer;
+
+                var sunrise = sample.substring(sample.indexOf("SUNRISE=") + 8, sample.indexOf("&BEEPING"));
+                if (sunrise == 1)
+                    document.getElementById("sunriseTog").checked = true;
+
+                var beeping = sample.substring(sample.indexOf("BEEPING=") + 8, sample.indexOf("&ALARM_TIME"));
+                if (beeping == 1)
+                    document.getElementById("beepingTog").checked = true;
+
+                var alarmTime = sample.substring(sample.indexOf("ALARM_TIME=") + 11, sample.indexOf("&ALARM_DAYS"));
+                document.getElementById("alarmTime").value = alarmTime;
+
+                var alarmDays = sample.substring(sample.indexOf("ALARM_DAYS=") + 11, sample.length);
+
+                if (alarmDays.indexOf("Su") > -1)
+                    document.getElementById("Su").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("Mo") > -1)
+                    document.getElementById("Mo").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("Tu") > -1)
+                    document.getElementById("Tu").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("We") > -1)
+                    document.getElementById("We").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("Th") > -1)
+                    document.getElementById("Th").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("Fr") > -1)
+                    document.getElementById("Fr").style.backgroundColor = '#42A5F5';
+                if (alarmDays.indexOf("Sa") > -1)
+                    document.getElementById("Sa").style.backgroundColor = '#42A5F5';
+            };
+        }
+
+        function setDimmer(val) {
+
+            connection.send("DIMMER=" + val);
+        }
+
+        function setClapper(val) {
+
+            var enabled = 0;
+            if (val)
+                enabled = 1;
+
+            connection.send("CLAPPER=" + enabled);
+        }
+
+        function setAlarm(val) {
+
+            var enabled = 0;
+            if (val)
+                enabled = 1;
+
+            connection.send("ALARM=" + enabled);
+        }
+
+        function setSunrise(val) {
+
+            var enabled = 0;
+            if (val)
+                enabled = 1;
+
+            connection.send("SUNRISE=" + enabled);
+        }
+
+        function setBeeping(val) {
+
+            var enabled = 0;
+            if (val)
+                enabled = 1;
+
+            connection.send("BEEPING=" + enabled);
+        }
+
+        function setAlarmTime(val) {
+
+            connection.send("ALARM_TIME=" + val);
+
+        }
+    </script>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+    <div id="outer" style="width:100%;position:relative;">
+        <div id="connModal" style="display:none;z-index:1;background-color:white;color:red;opacity:0.85;padding-top:10px;text-align:center;width:313px;height:40px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);border:1px dashed black;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+            <div id="connModalContent" style="animation: blinker 2s linear infinite;"></div>
+        </div>
+        <div style="width:313px;height:380px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);border:0px dashed black;">
+            <div style="width:100%;">
+                <div style="float:left;width:100%;padding-top:5px;">
+                    <div style="width:100%;height:30px;padding:5px 0 5px 5px;border:0px dashed black;">
+                        <div style="float:left;width:50%;margin-top:-6px;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                            Clapper
+                        </div>
+                        <div style="float:left;">
+                            <div class="clapperTog">
+                                <input type="checkbox" name="clapperTog" class="clapperTog-checkbox" id="clapperTog" onChange="setClapper(this.checked);">
+                                <label class="clapperTog-label" for="clapperTog"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;padding:5px 0 12px 5px;border:0px dashed black;">
+                        <div style="float:left;width:50%;margin-top:-6px;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                            Alarm
+                        </div>
+                        <div style="float:left;">
+                            <div class="alarmTog">
+                                <input type="checkbox" name="alarmTog" class="alarmTog-checkbox" id="alarmTog" onChange="setAlarm(this.checked);">
+                                <label class="alarmTog-label" for="alarmTog"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="width:100%;">
+                <div style="float:left;padding-left:3px;padding-top:5px;">
+                    <img src="moon_30px.png" />
+                </div>
+                <div style="float:left;padding:0 5px;">
+                    <input type="range" style="width:232px;" id="dimmerSlider" min="0" max="100" value="0" step="1" oninput="setDimmer(this.value);" />
+                </div>
+                <div style="float:left;">
+                    <img src="sun_38px.png" />
+                </div>
+            </div>
+
+            <div style="width:100%;float:left;padding:12px 0 12px 5px;font-size:25px;font-style:italic;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                Alarm settings
+            </div>
+            <div style="width:100%;">
+
+                <div style="float:left;width:100%;padding-top:5px;">
+                    <div style="width:100%;height:30px;padding:5px 0 5px 5px;border:0px dashed black;">
+                        <div style="float:left;width:50%;margin-top:-6px;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                            Sunrise
+                        </div>
+                        <div style="float:left;">
+                            <div class="clapperTog">
+                                <input type="checkbox" name="sunriseTog" class="sunriseTog-checkbox" id="sunriseTog" onChange="setSunrise(this.checked);">
+                                <label class="sunriseTog-label" for="sunriseTog"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;padding:5px 0 10px 5px;border:0px dashed black;">
+                        <div style="float:left;width:50%;margin-top:-6px;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                            Beeping
+                        </div>
+                        <div style="float:left;">
+                            <div class="alarmTog">
+                                <input type="checkbox" name="beepingTog" class="beepingTog-checkbox" id="beepingTog" onChange="setBeeping(this.checked);">
+                                <label class="beepingTog-label" for="beepingTog"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;padding:5px 0 25px 5px;border:0px dashed black;">
+                        <div style="float:left;width:40%;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;">
+                            Time
+                        </div>
+                        <div style="float:left;">
+                            <input name="alarmTime" id="alarmTime" type="time" style="font-size:20px;max-width:150px;" onInput="setAlarmTime(this.value);">
+                        </div>
+                    </div>
+                    <div style="width:100%;height:30px;padding:5px 0 10px 5px;border:0px dashed black;">
+                        <div id="Mo" style="background-color:white;float:left;width:37px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;" onclick="setDay(this);">
+                            Mo
+                        </div>
+                        <div id="Tu" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            Tu
+                        </div>
+                        <div id="We" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            We
+                        </div>
+                        <div id="Th" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            Th
+                        </div>
+                        <div id="Fr" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            Fr
+                        </div>
+                        <div id="Sa" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            Sa
+                        </div>
+                        <div id="Su" style="background-color:white;float:left;width:37px;margin-left:5px;border:1px solid black;margin-top:-6px;text-align:center;font-size:25px;-webkit-font-smoothing:antialiased;font-family:'proxima-nova','open-sans','Calibri',Helvetica,sans-serif;"
+                            onclick="setDay(this);">
+                            Su
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
