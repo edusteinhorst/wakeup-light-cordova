@@ -12,7 +12,7 @@ This is the Apache Cordova code used to create a wake-up light with the followin
 * Beeping as a failsafe wake-up alarm and audio feedback
 * A hidden morse-code message as an easter egg 
 	
-Please check out the full project at https://www.edusteinhorst.com/a-diy-internet-aware-smartphone-controlled-wake-up-light/
+Please check out the full project at https://www.edusteinhorst.com/building-a-smartphone-controlled-wake-up-light/
 
 Also check the ESP8266 part of the project: https://github.com/edusteinhorst/wakeup-light-esp8266
 
